@@ -5,42 +5,14 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:component-scan base-package="guru.springframework" />
-
+	
+	<import resource="classpath*:spring/helloworld-config.xml"/>
+	
 	<bean id="greetingController" class="guru.springframework.controllers.GreetingController">
 		<property name="helloWorldService" ref="helloWorldServiceDefault"></property>
 		<property name="helloWorldServiceFrench" ref="french"></property>
 		<property name="helloWorldServiceGerman" ref="helloWorldServiceGerman"></property>
 		<property name="helloWorldServicePolish" ref="helloWorldServicePolish"></property>
 	</bean>
-
-	<bean id="helloWorldFactory" class="guru.springframework.services.HelloWorldFactory"></bean>
-	
-	<bean id="french" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
-		<constructor-arg value="fr"></constructor-arg>
-	</bean>
-	
-	<bean id="helloWorldServiceGerman" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
-		<constructor-arg value="de"></constructor-arg>
-	</bean>
-	
-	<bean id="helloWorldServicePolish" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
-		<constructor-arg value="pl"></constructor-arg>
-	</bean>
-	
-	<bean id="helloWorldServiceRussianImpl" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
-		<constructor-arg value="ru"></constructor-arg>
-	</bean>
-	
-	<beans profile="english">
-		<bean id="helloWorldServiceDefault" factory-bean="helloWorldFactory" factory-method="createHelloWorldService" primary="true">
-			<constructor-arg value="en"></constructor-arg>
-		</bean>
-	</beans>
-	
-	<beans profile="spanish">
-		<bean id="helloWorldServiceDefault" factory-bean="helloWorldFactory" factory-method="createHelloWorldService" primary="true">
-			<constructor-arg value="es"></constructor-arg>
-		</bean>
-	</beans>
 	
 </beans>
