@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import guru.springframework.services.HelloWorldService;
-import guru.springframework.services.HelloWorldServiceGermanImpl;
 
 @Controller
 public class GreetingController {
