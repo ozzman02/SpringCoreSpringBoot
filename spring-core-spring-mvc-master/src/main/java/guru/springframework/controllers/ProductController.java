@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import guru.springframework.domain.Product;
 import guru.springframework.services.ProductService;
 
 @Controller
@@ -29,4 +31,17 @@ public class ProductController {
 		model.addAttribute("product", productService.getProductById(id));
 		return "product";
 	}
+	
+	@RequestMapping("/product/new")
+	public String newProduct(Model model) {
+		model.addAttribute("product", new Product());
+		return "productform";
+	}
+	
+	@RequestMapping(value = "/product", method = RequestMethod.POST)
+	public String saveOrUpdateProduct(Product product) {
+		Product newProduct = productService.saveOrUpdateProduct(product);
+		return "redirect:/product/" + newProduct.getId();
+	}
+	
 }
