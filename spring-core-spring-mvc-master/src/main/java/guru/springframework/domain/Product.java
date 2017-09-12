@@ -2,7 +2,7 @@ package guru.springframework.domain;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements DomainObject {
 	
 	private Integer id;
 	
@@ -12,14 +12,16 @@ public class Product {
 	
 	private String imageUrl;
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
@@ -43,5 +45,5 @@ public class Product {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import guru.springframework.domain.Product;
 import guru.springframework.services.ProductService;
 
+
 @Controller
 public class ProductController {
 	
@@ -20,40 +21,40 @@ public class ProductController {
 		this.productService = productService;
 	}
 
-	@RequestMapping("/products")
+	@RequestMapping("/product/list")
 	public String listProducts(Model mode) {
-		mode.addAttribute("products", productService.listAllProducts());
-		return "products";
+		mode.addAttribute("products", productService.listAll());
+		return "product/list";
 	}
 	
-	@RequestMapping("/product/{id}")
+	@RequestMapping("/product/show/{id}")
 	public String getProduct(@PathVariable Integer id, Model model) {
-		model.addAttribute("product", productService.getProductById(id));
-		return "product";
+		model.addAttribute("product", productService.getById(id));
+		return "product/show";
 	}
 	
 	@RequestMapping("product/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model) {
-		model.addAttribute("product", productService.getProductById(id));
-		return "productForm";
+		model.addAttribute("product", productService.getById(id));
+		return "product/productform";
 	}
 	
 	@RequestMapping("/product/new")
 	public String newProduct(Model model) {
 		model.addAttribute("product", new Product());
-		return "productform";
+		return "product/productform";
 	}
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
 	public String saveOrUpdateProduct(Product product) {
-		Product newProduct = productService.saveOrUpdateProduct(product);
-		return "redirect:/product/" + newProduct.getId();
+		Product newProduct = productService.saveOrUpdate(product);
+		return "redirect:/product/show/" + newProduct.getId();
 	}
 	
 	@RequestMapping("/product/delete/{id}")
 	public String delete(@PathVariable Integer id) {
-		productService.deleteProduct(id);
-		return "redirect:/products";
+		productService.delete(id);
+		return "redirect:/product/list";
 	}
 	
 }
