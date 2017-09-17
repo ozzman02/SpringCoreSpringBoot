@@ -121,6 +121,4 @@ public class Customer implements DomainObject {
 		this.zipCode = zipCode;
 	}
 
-	
-	
 }

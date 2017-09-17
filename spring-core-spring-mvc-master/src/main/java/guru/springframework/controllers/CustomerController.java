@@ -42,7 +42,7 @@ public class CustomerController {
 	@RequestMapping("/new")
 	public String newCustomer(Model model) {
 		model.addAttribute("customer", new Customer());
-		return "customerform";
+		return "customer/customerform";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
