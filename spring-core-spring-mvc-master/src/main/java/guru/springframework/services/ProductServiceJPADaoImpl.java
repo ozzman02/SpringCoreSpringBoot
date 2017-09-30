@@ -13,7 +13,7 @@ import guru.springframework.domain.Product;
 
 @Service
 @Profile("jpaDao")
-public class ProductServiceJPADaoImpl implements ProductService {
+public class ProductServiceJpaDaoImpl implements ProductService {
 
 	private EntityManagerFactory emf;
 	
