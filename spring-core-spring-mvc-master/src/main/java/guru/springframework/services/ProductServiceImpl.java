@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import guru.springframework.domain.DomainObject;
 import guru.springframework.domain.Product;
 
+@SuppressWarnings("unused")
 @Service
 @Profile("map")
 public class ProductServiceImpl extends AbstractMapService implements ProductService {
@@ -34,7 +35,7 @@ public class ProductServiceImpl extends AbstractMapService implements ProductSer
 		super.delete(id);
 	}
 
-	protected void loadDomainObjects() {
+	/*protected void loadDomainObjects() {
 		
 		domainMap = new HashMap<>();
 
@@ -77,6 +78,6 @@ public class ProductServiceImpl extends AbstractMapService implements ProductSer
 		product5.setImageUrl("http://example.com/product5");
 
 		domainMap.put(5, product5);
-	}
+	}*/
 
 }
