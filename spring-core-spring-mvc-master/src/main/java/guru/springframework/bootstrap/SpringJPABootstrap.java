@@ -15,19 +15,11 @@ import guru.springframework.services.ProductService;
 @Component
 public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
+	@Autowired
 	private ProductService productService;
 
+	@Autowired
 	private CustomerService customerService;
-
-	@Autowired
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
-	}
-
-	@Autowired
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
-	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {

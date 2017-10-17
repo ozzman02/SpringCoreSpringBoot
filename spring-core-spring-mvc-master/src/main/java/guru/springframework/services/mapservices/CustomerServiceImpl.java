@@ -1,4 +1,4 @@
-package guru.springframework.services;
+package guru.springframework.services.mapservices;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import guru.springframework.domain.Customer;
 import guru.springframework.domain.DomainObject;
+import guru.springframework.services.CustomerService;
 
 @SuppressWarnings("unused")
 @Service

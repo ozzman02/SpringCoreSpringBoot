@@ -1,11 +1,17 @@
 package guru.springframework.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+/**
+ * @author Oscar
+ *
+ */
 @Entity
 public class Customer implements DomainObject {
 
@@ -33,6 +39,9 @@ public class Customer implements DomainObject {
 	private String state;
 	
 	private String zipCode;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private User user;
 	
 	public Customer() {}
 
@@ -141,4 +150,12 @@ public class Customer implements DomainObject {
 		this.zipCode = zipCode;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }
