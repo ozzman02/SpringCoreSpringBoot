@@ -8,6 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import guru.springframework.config.JpaIntegrationConfig;
+import guru.springframework.domain.Customer;
 import guru.springframework.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +24,7 @@ public class UserServiceJpaDaoImplTest {
 	}
 	
 	@Test
-	public void testSaveOrUpdateUser() throws Exception {
+	public void testSaveOfUser() throws Exception {
 		
 		User user = new User();
 		user.setUsername("someusername");
@@ -36,6 +37,28 @@ public class UserServiceJpaDaoImplTest {
 		
 		System.out.println("Encrypted Password");
         System.out.println(savedUser.getEncryptedPassword());
+	}
+	
+	@Test
+	public void testSaveOfUserWithCustomer() throws Exception {
+		
+		User user = new User();
+		user.setUsername("someusername");
+		user.setPassword("mypassword");
+		
+		Customer customer = new Customer();
+		customer.setFirstName("Chevy");
+		customer.setLastName("Chase");
+		
+		user.setCustomer(customer);
+		
+		User savedUser = userService.saveOrUpdate(user);
+		
+		assert savedUser.getId() != null;
+		assert savedUser.getVersion() != null;
+		assert savedUser.getCustomer() != null;
+		assert savedUser.getCustomer().getId() != null;
+		
 	}
 
 }

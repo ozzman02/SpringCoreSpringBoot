@@ -40,7 +40,7 @@ public class Customer implements DomainObject {
 	
 	private String zipCode;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	private User user;
 	
 	public Customer() {}
