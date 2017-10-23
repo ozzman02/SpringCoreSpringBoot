@@ -15,22 +15,25 @@ public class User implements DomainObject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Version
 	private Integer version;
-	
+
 	private String username;
-	
+
 	@Transient
 	private String password;
-	
+
 	private String encryptedPassword;
-	
+
 	private Boolean enabled = true;
 
-	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	private Customer customer;
-	
+
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Cart cart;
+
 	@Override
 	public Integer getId() {
 		return id;
@@ -88,6 +91,14 @@ public class User implements DomainObject {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 		customer.setUser(this);
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 	
 }
