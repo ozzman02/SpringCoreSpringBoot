@@ -1,160 +1,86 @@
 package guru.springframework.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
 
-/**
- * @author Oscar
- *
- */
 @Entity
-public class Customer implements DomainObject {
+public class Customer extends AbstractDomainClass {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	
-	@Version
-	private Integer version;
-	
 	private String firstName;
-	
-	private String lastName;
-	
-	private String email;
-	
-	private String phoneNumber;
-	
-	private String addressLine1;
-	
-	private String addressLine2;
-	
-	private String city;
-	
-	private String state;
-	
-	private String zipCode;
-	
-	@OneToOne
-	private User user;
-	
-	public Customer() {}
+    private String lastName;
+    private String email;
+    private String phoneNumber;
 
-	public Customer(Integer id, String firstName, String lastName, String email, String phoneNumber,
-			String addressLine1, String addressLine2, String city, String state, String zipCode) {
-		
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
-		this.city = city;
-		this.state = state;
-		this.zipCode = zipCode;
-	}
+    @Embedded
+    private Address billingAddress;
 
-	@Override
-	public Integer getId() {
-		return id;
-	}
+    @Embedded
+    private Address shippingAddress;
 
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Integer getVersion() {
-		return version;
-	}
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private User user;
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    @Override
+    public Integer getId() {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public String getAddressLine1() {
-		return addressLine1;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public String getAddressLine2() {
-		return addressLine2;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
-	}
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
 	
 }
