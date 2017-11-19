@@ -17,7 +17,6 @@ import guru.springframework.domain.OrderDetail;
 import guru.springframework.domain.Product;
 import guru.springframework.domain.User;
 import guru.springframework.enums.OrderStatus;
-import guru.springframework.services.CustomerService;
 import guru.springframework.services.ProductService;
 import guru.springframework.services.UserService;
 
