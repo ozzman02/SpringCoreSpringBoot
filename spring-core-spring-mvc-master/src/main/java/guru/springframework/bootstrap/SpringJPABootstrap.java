@@ -16,8 +16,10 @@ import guru.springframework.domain.Order;
 import guru.springframework.domain.OrderDetail;
 import guru.springframework.domain.Product;
 import guru.springframework.domain.User;
+import guru.springframework.domain.security.Role;
 import guru.springframework.enums.OrderStatus;
 import guru.springframework.services.ProductService;
+import guru.springframework.services.RoleService;
 import guru.springframework.services.UserService;
 
 @Component
@@ -28,6 +30,9 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -35,6 +40,8 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		loadUsersAndCustomers();
 		loadCarts();
 		loadOrderHistory();
+		loadRoles();
+        assignUsersToDefaultRole();
 	}
 
 	private void loadProducts() {
@@ -163,4 +170,25 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 			userService.saveOrUpdate(user);
 		});
 	}
+	
+	private void loadRoles() {
+        Role role = new Role();
+        role.setRole("CUSTOMER");
+        roleService.saveOrUpdate(role);
+    }
+	
+	@SuppressWarnings("unchecked")
+	private void assignUsersToDefaultRole() {
+        List<Role> roles = (List<Role>) roleService.listAll();
+        List<User> users = (List<User>) userService.listAll();
+
+        roles.forEach(role ->{
+            if(role.getRole().equalsIgnoreCase("CUSTOMER")){
+                users.forEach(user -> {
+                    user.addRole(role);
+                    userService.saveOrUpdate(user);
+                });
+            }
+        });
+    }
 }
